@@ -2635,6 +2635,8 @@ class SchemaParserV3(SchemaParserV22):
         name = row["keyspace_name"]
         durable_writes = row["durable_writes"]
         strategy_options = dict(row["replication"])
+        if 'class' not in strategy_options:
+            log.warning(f'class not in strategy_options: {row}, {strategy_options}')
         strategy_class = strategy_options.pop("class")
         return KeyspaceMetadata(name, durable_writes, strategy_class, strategy_options)
 
