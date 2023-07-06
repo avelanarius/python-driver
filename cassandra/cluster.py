@@ -4609,7 +4609,8 @@ class ResponseFuture(object):
             # wait for it endlessly
             except KeyError:
                 key = "Connection defunct by heartbeat"
-                errors = {key: "Client request timeout. See Session.execute[_async](timeout)"}
+                errors = {key: "Client request timeout. See Session.execute[_async](timeout)."
+                               f"Connection closed: {self._connection.is_closed}, defunct: {self._connection.is_defunct}"}
                 self._set_final_exception(OperationTimedOut(errors, self._current_host))
                 return
 
