@@ -1773,8 +1773,6 @@ class Cluster(object):
                 try:
                     self.control_connection.connect()
 
-                    self.load_balancing_policy.populate(weakref.proxy(self), self.metadata.all_hosts())
-
                     # we set all contact points up for connecting, but we won't infer state after this
                     for endpoint in self.endpoints_resolved:
                         h = self.metadata.get_host(endpoint)
