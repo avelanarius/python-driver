@@ -24,7 +24,7 @@ class ProtocolFeatures(object):
     def parse_from_supported(supported):
         rate_limit_error = ProtocolFeatures.maybe_parse_rate_limit_error(supported)
         shard_id, sharding_info = ProtocolFeatures.parse_sharding_info(supported)
-        tablets_routing_v1 = ProtocolFeatures.parse_tablets_info(supported)
+        tablets_routing_v1 = False
         return ProtocolFeatures(rate_limit_error, shard_id, sharding_info, tablets_routing_v1)
 
     @staticmethod
@@ -71,4 +71,4 @@ class ProtocolFeatures(object):
 
     @staticmethod
     def parse_tablets_info(options):
-        return TABLETS_ROUTING_V1 in options
+        return False

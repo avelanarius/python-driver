@@ -3688,7 +3688,7 @@ class ControlConnection(object):
         if connection.features.sharding_info is not None:
             self._uses_peers_v2 = False
         
-        self._tablets_routing_v1 = connection.features.tablets_routing_v1
+        self._tablets_routing_v1 = False
 
         # use weak references in both directions
         # _clear_watcher will be called when this ControlConnection is about to be finalized

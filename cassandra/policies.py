@@ -347,7 +347,7 @@ class TokenAwarePolicy(LoadBalancingPolicy):
 
     def populate(self, cluster, hosts):
         self._cluster_metadata = cluster.metadata
-        self._tablets_routing_v1 = cluster.control_connection._tablets_routing_v1
+        self._tablets_routing_v1 = False
         self._child_policy.populate(cluster, hosts)
 
     def check_supported(self):

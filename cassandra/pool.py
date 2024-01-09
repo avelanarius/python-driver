@@ -438,7 +438,7 @@ class HostConnection(object):
         if first_connection.features.sharding_info and not self._session.cluster.shard_aware_options.disable:
             self.host.sharding_info = first_connection.features.sharding_info
             self._open_connections_for_all_shards(first_connection.features.shard_id)
-        self.tablets_routing_v1 = first_connection.features.tablets_routing_v1
+        self.tablets_routing_v1 = False
 
         log.debug("Finished initializing connection for host %s", self.host)
 
