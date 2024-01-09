@@ -378,19 +378,7 @@ class TokenAwarePolicy(LoadBalancingPolicy):
                 for host in child.make_query_plan(keyspace, query):
                     yield host
             else:
-                replicas = []
-                if self._tablets_routing_v1:
-                    tablet = self._cluster_metadata._tablets.get_tablet_for_key(keyspace, query.table, self._cluster_metadata.token_map.token_class.from_key(routing_key))
-
-                    if tablet is not None:
-                        replicas_mapped = set(map(lambda r: r[0], tablet.replicas))
-                        child_plan = child.make_query_plan(keyspace, query)
-
-                        replicas = [host for host in child_plan if host.host_id in replicas_mapped]
-
-                if replicas == []:
-                    replicas = self._cluster_metadata.get_replicas(keyspace, routing_key)
-
+                replicas = self._cluster_metadata.get_replicas(keyspace, routing_key)
                 if self.shuffle_replicas:
                     shuffle(replicas)
                 for replica in replicas:
